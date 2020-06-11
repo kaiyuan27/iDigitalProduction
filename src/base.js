@@ -35,18 +35,27 @@ export const Base = (props) => {
     return (
       <div>
         <Router>
-          <Header {...props} base={props.base} />
-          <Route
-            path="/"
-            exact
-            component={(props) => <Home {...props} base={props.base} />}
-          />
-          <Footer base={props.base} />
+          <NavContext.Provider
+            value={{
+              ...state,
+              updateCurrentNav,
+            }}
+          >
+            <Header {...props} base={props.base} />
+            <Route
+              path="/"
+              exact
+              component={(props) => <Home {...props} base={props.base} />}
+            />
+            <Footer base={props.base} />
+          </NavContext.Provider>
         </Router>
       </div>
     );
   } else {
-    return <div>test base data empty</div>;
+    return (
+      <div>test base data empty</div>
+    )
   }
 };
 
